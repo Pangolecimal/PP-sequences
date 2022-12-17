@@ -74,7 +74,7 @@ _Выполнил Зайцев А.А. ИКБО-10-22_
 
 Код: A265326
 
-<img src="Pictures/PrimeBinrev_25K.png" width="40%" alt="25K terms">
+<img src="Pictures/PrimeBinRev_25K.png" width="40%" alt="25K terms">
 
 Первые 25 тысяч чисел. Бесконечно много параллелограммов, где каждый последующий в 2 раза больше предыдущего.
 
