@@ -38,7 +38,7 @@ _Выполнил Зайцев А.А. ИКБО-10-22_
 
 Код: A342585
 
-<img src="Inventory_100M.png" width="25%" alt="100M terms">
+<img src="Pictures/Inventory_100M.png" width="40%" alt="100M terms">
 
 Первые 100 миллионов чисел. Изначально график выглядит очень хаотично, однако на огромных значениях структура проглядывается.
 
@@ -46,7 +46,7 @@ _Выполнил Зайцев А.А. ИКБО-10-22_
 
 Код: A002487
 
-<img src="SternBrocot_10K.png" width="25%" alt="10K terms">
+<img src="Pictures/SternBrocot_10K.png" width="40%" alt="10K terms">
 
 Первые 10 тысяч чисел. Похоже на какой-нибудь собор или церковь.
 
@@ -66,7 +66,7 @@ _Выполнил Зайцев А.А. ИКБО-10-22_
 
 Код: A133058
 
-<img src="Dammit_10K.png" width="25%" alt="10K terms">
+<img src="Pictures/Dammit_10K.png" width="40%" alt="10K terms">
 
 Первые 10 тысяч чисел. Этот график очень похож на сцену из фильма Аватар, где Джейк учится летать на Икране. Сначала ничего не выходит и полёт хаотичен, однако в один момент он начинает лететь плавно.
 
@@ -74,7 +74,7 @@ _Выполнил Зайцев А.А. ИКБО-10-22_
 
 Код: A265326
 
-<img src="PrimeBinrev_25K.png" width="25%" alt="25K terms">
+<img src="Pictures/PrimeBinrev_25K.png" width="40%" alt="25K terms">
 
 Первые 25 тысяч чисел. Бесконечно много параллелограммов, где каждый последующий в 2 раза больше предыдущего.
 
@@ -82,7 +82,7 @@ _Выполнил Зайцев А.А. ИКБО-10-22_
 
 Код: A279125
 
-<img src="RemySigrist_10K.png" width="25%" alt="10K terms">
+<img src="Pictures/RemySigrist_10K.png" width="40%" alt="10K terms">
 
 Первые 10 тысяч чисел. Похоже на Альпы.
 
@@ -90,7 +90,7 @@ _Выполнил Зайцев А.А. ИКБО-10-22_
 
 Код: A063543
 
-<img src="Wisteria_2K.png" width="25%" alt="10K terms">
+<img src="Pictures/Wisteria_2K.png" width="40%" alt="10K terms">
 
 Первые 2 тысячи чисел. Похоже на листву Глицинии.
 
@@ -98,6 +98,6 @@ _Выполнил Зайцев А.А. ИКБО-10-22_
 
 Код: A229037
 
-<img src="ForestFire_10K.png" width="25%" alt="10K terms">
+<img src="Pictures/ForestFire_10K.png" width="40%" alt="10K terms">
 
 Первые 10 тысяч чисел. Похоже на дым (или волны).
