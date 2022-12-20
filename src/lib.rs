@@ -1,22 +1,40 @@
 #![allow(unused_imports, dead_code, non_snake_case, non_camel_case_types)]
 
-pub fn get_input() -> u128 {
+fn get_input_range(max: u128, msg: &str) -> u128 {
+    print!("{}", msg);
+    let n_result: Result<u128, _> = get_input_line().parse();
+
+    let mut n = match n_result {
+        Ok(m) => m,
+        Err(_) => 0,
+    };
+
+    if n < 1 || n >= max {
+        n = 0;
+    }
+
+    if n == 0 {
+        println!("Error: expected integer in range: [1, {}]", max);
+        println!();
+        return get_input_range(max, msg);
+    }
+
+    return n;
+}
+
+fn get_input_line() -> String {
     let mut input_line = String::new();
     std::io::Write::flush(&mut std::io::stdout()).unwrap();
     std::io::stdin()
         .read_line(&mut input_line)
         .expect("Failed to read line");
-    let num: u128 = input_line
-        .trim()
-        .parse()
-        .expect("   !!!! Input not an integer !!!!   ");
-    num
+    let line = input_line.trim();
+    return line.to_string();
 }
 
 pub mod miller_rabin {
     pub fn primality_test() {
-        print!("Input a number: ");
-        let num: u128 = crate::get_input();
+        let num: u128 = crate::get_input_range(u128::MAX, "Input a number to test: ");
 
         let prime = is_prime(num);
         println!(
@@ -123,8 +141,10 @@ pub mod miller_rabin {
 
 pub mod inventory {
     pub fn A342585() {
-        print!("Input number of rows of terms to generate: ");
-        let num: u32 = crate::get_input() as u32;
+        let num: u32 = crate::get_input_range(
+            u32::MAX as u128,
+            "Input number of rows of terms to generate: ",
+        ) as u32;
 
         let seq = get_inv(num)
             .clone()
@@ -169,8 +189,8 @@ pub mod inventory {
 
 pub mod stern_brocot {
     pub fn A002487() {
-        print!("Input number of terms to generate: ");
-        let num: u32 = crate::get_input() as u32;
+        let num: u32 =
+            crate::get_input_range(u32::MAX as u128, "Input number of terms to generate: ") as u32;
 
         let mut seq = vec![0; num as usize];
         for i in 0..num {
@@ -200,8 +220,8 @@ pub mod stern_brocot {
 
 pub mod kolakoski {
     pub fn A000002() {
-        print!("Input number of terms to generate: ");
-        let num: u32 = crate::get_input() as u32;
+        let num: u32 =
+            crate::get_input_range(u32::MAX as u128, "Input number of terms to generate: ") as u32;
 
         let seq = gen(num);
 
@@ -231,8 +251,8 @@ pub mod kolakoski {
 
 pub mod dammit {
     pub fn A133058() {
-        print!("Input number of terms to generate: ");
-        let num: u32 = crate::get_input() as u32;
+        let num: u32 =
+            crate::get_input_range(u32::MAX as u128, "Input number of terms to generate: ") as u32;
 
         let seq = gen(num);
 
@@ -271,8 +291,8 @@ pub mod prime_bin_rev {
     use crate::miller_rabin::is_prime;
 
     pub fn A265326() {
-        print!("Input number of terms to generate: ");
-        let num: u32 = crate::get_input() as u32;
+        let num: u32 =
+            crate::get_input_range(u32::MAX as u128, "Input number of terms to generate: ") as u32;
 
         let seq = gen(num);
 
@@ -315,8 +335,8 @@ pub mod prime_bin_rev {
 
 pub mod remy_sigrist {
     pub fn A279125() {
-        print!("Input number of terms to generate: ");
-        let num: u32 = crate::get_input() as u32;
+        let num: u32 =
+            crate::get_input_range(u32::MAX as u128, "Input number of terms to generate: ") as u32;
 
         let seq = gen(num);
 
@@ -346,8 +366,8 @@ pub mod remy_sigrist {
 
 pub mod wisteria {
     pub fn A063543() {
-        print!("Input number of terms to generate: ");
-        let num: u32 = crate::get_input() as u32;
+        let num: u32 =
+            crate::get_input_range(u32::MAX as u128, "Input number of terms to generate: ") as u32;
 
         let seq = gen(num);
 
@@ -383,8 +403,8 @@ pub mod wisteria {
 
 pub mod forest_fire {
     pub fn A229037() {
-        print!("Input number of terms to generate: ");
-        let num: u32 = crate::get_input() as u32;
+        let num: u32 =
+            crate::get_input_range(u32::MAX as u128, "Input number of terms to generate: ") as u32;
 
         let seq = gen(num);
 

@@ -55,15 +55,43 @@ fn get_mode(modes: Vec<String>) -> String {
         println!("- mode {}: {}", i, modes[i]);
     }
     println!();
-    println!("Pick mode: ");
+    print!("Pick mode: ");
 
+    let n: usize = get_input_range(modes.len() as i32) as usize;
+
+    modes[n].clone()
+}
+
+/**
+ * from 0 up to, but not including, MAX
+ */
+fn get_input_range(max: i32) -> i32 {
+    let n_result: Result<i32, _> = get_input_line().parse();
+
+    let mut n: i32 = match n_result {
+        Ok(m) => m,
+        Err(_) => -1,
+    };
+
+    if n < 0 || n >= max {
+        n = -1;
+    }
+
+    if n == -1 {
+        println!("Error: expected integer in range: [0, {}]", max);
+        return get_input_range(max);
+    }
+
+    return n;
+}
+
+fn get_input_line() -> String {
     let mut input_line = String::new();
+    std::io::Write::flush(&mut std::io::stdout()).unwrap();
     std::io::stdin()
         .read_line(&mut input_line)
         .expect("Failed to read line");
-    let n: usize = input_line.trim().parse().expect("Input not an integer");
-
-    modes[n].clone()
+    return input_line.trim().to_string();
 }
 
 fn clear() {
