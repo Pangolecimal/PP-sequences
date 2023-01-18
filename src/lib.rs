@@ -1,8 +1,8 @@
 #![allow(unused_imports, dead_code, non_snake_case, non_camel_case_types)]
 
-fn get_input_range(max: u128, msg: &str) -> u128 {
+fn get_input_range(max: i128, msg: &str) -> i128 {
     print!("{}", msg);
-    let n_result: Result<u128, _> = get_input_line().parse();
+    let n_result: Result<i128, _> = get_input_line().parse();
 
     let mut n = match n_result {
         Ok(m) => m,
@@ -33,17 +33,19 @@ fn get_input_line() -> String {
 }
 
 pub mod miller_rabin {
-    pub fn primality_test() {
-        let num: u128 = crate::get_input_range(u128::MAX, "Input a number to test: ");
+    pub fn primality_test() -> Option<(Vec<i128>, String)> {
+        let num: i128 = crate::get_input_range(i128::MAX, "Input a number to test: ");
 
         let prime = is_prime(num);
         println!(
             "Your number is {}",
             if prime { "prime" } else { "composite" }
         );
+
+        None
     }
 
-    pub fn is_prime(n: u128) -> bool {
+    pub fn is_prime(n: i128) -> bool {
         if n < 2 || n % 2 == 0 {
             return false;
         }
@@ -60,14 +62,14 @@ pub mod miller_rabin {
         true
     }
 
-    fn prepare(n: u128, p: u128) -> (u128, u128) {
+    fn prepare(n: i128, p: i128) -> (i128, i128) {
         if n % 2 == 1 {
             return (p, n);
         }
         prepare(n / 2, p + 1)
     }
 
-    fn get_a(n: u128) -> Vec<u128> {
+    fn get_a(n: i128) -> Vec<i128> {
         if n < 2_047 {
             return vec![2];
         }
@@ -114,10 +116,10 @@ pub mod miller_rabin {
         ]
     }
 
-    fn power_mod(a: u128, d: u128, s: u128, n: u128) -> u128 {
-        let mut ans: u128 = 1;
+    fn power_mod(a: i128, d: i128, s: i128, n: i128) -> i128 {
+        let mut ans: i128 = 1;
         for i in 0..s {
-            ans = fme(a, (2 as u128).pow(i as u32) * d, n);
+            ans = fme(a, (2 as i128).pow(i as u32) * d, n);
             if ans == 1 || ans == n - 1 {
                 return ans;
             }
@@ -125,8 +127,8 @@ pub mod miller_rabin {
         ans
     }
     // Fast modular exponentiation
-    fn fme(mut base: u128, mut exp: u128, modulus: u128) -> u128 {
-        let mut result: u128 = 1;
+    fn fme(mut base: i128, mut exp: i128, modulus: i128) -> i128 {
+        let mut result: i128 = 1;
         base = base % modulus;
         while exp > 0 {
             if exp % 2 == 1 {
@@ -140,26 +142,23 @@ pub mod miller_rabin {
 }
 
 pub mod inventory {
-    pub fn A342585() {
-        let num: u32 = crate::get_input_range(
-            u32::MAX as u128,
+    pub fn A342585() -> Option<(Vec<i128>, String)> {
+        let num: i128 = crate::get_input_range(
+            i128::MAX as i128,
             "Input number of rows of terms to generate: ",
-        ) as u32;
+        ) as i128;
 
         let seq = get_inv(num)
             .clone()
             .into_iter()
             .flatten()
-            .collect::<Vec<u32>>();
+            .collect::<Vec<i128>>();
 
-        print!("A342585 Sequence: ");
-        for i in 0..seq.len() {
-            print!("{:?} ", seq[i]);
-        }
+        Some((seq, "A342585 Sequence: ".into()))
     }
 
-    fn get_inv(n: u32) -> Vec<Vec<u32>> {
-        let mut ans: Vec<Vec<u32>> = vec![Vec::new(); n as usize];
+    fn get_inv(n: i128) -> Vec<Vec<i128>> {
+        let mut ans: Vec<Vec<i128>> = vec![Vec::new(); n as usize];
         ans[0] = vec![0];
         for i in 1..n {
             let mut j = 0;
@@ -175,9 +174,9 @@ pub mod inventory {
         ans
     }
 
-    fn count(arr: &Vec<Vec<u32>>, n: u32) -> u32 {
-        let mut c: u32 = 0; // count of n in arr
-        let flattened = arr.clone().into_iter().flatten().collect::<Vec<u32>>();
+    fn count(arr: &Vec<Vec<i128>>, n: i128) -> i128 {
+        let mut c: i128 = 0; // count of n in arr
+        let flattened = arr.clone().into_iter().flatten().collect::<Vec<i128>>();
         for i in flattened {
             if n == i {
                 c += 1;
@@ -188,22 +187,20 @@ pub mod inventory {
 }
 
 pub mod stern_brocot {
-    pub fn A002487() {
-        let num: u32 =
-            crate::get_input_range(u32::MAX as u128, "Input number of terms to generate: ") as u32;
+    pub fn A002487() -> Option<(Vec<i128>, String)> {
+        let num: i128 =
+            crate::get_input_range(i128::MAX as i128, "Input number of terms to generate: ")
+                as i128;
 
         let mut seq = vec![0; num as usize];
         for i in 0..num {
             seq[i as usize] = term(i);
         }
 
-        print!("A002487 Sequence: ");
-        for i in 0..num {
-            print!("{} ", seq[i as usize]);
-        }
+        Some((seq, "A002487 Sequence: ".into()))
     }
 
-    fn term(n: u32) -> u32 {
+    fn term(n: i128) -> i128 {
         if n < 2 {
             return n;
         }
@@ -219,19 +216,17 @@ pub mod stern_brocot {
 }
 
 pub mod kolakoski {
-    pub fn A000002() {
-        let num: u32 =
-            crate::get_input_range(u32::MAX as u128, "Input number of terms to generate: ") as u32;
+    pub fn A000002() -> Option<(Vec<i128>, String)> {
+        let num: i128 =
+            crate::get_input_range(i128::MAX as i128, "Input number of terms to generate: ")
+                as i128;
 
         let seq = gen(num);
 
-        print!("A000002 Sequence: ");
-        for i in 0..num {
-            print!("{} ", seq[i as usize]);
-        }
+        Some((seq, "A000002 Sequence: ".into()))
     }
 
-    fn gen(n: u32) -> Vec<u32> {
+    fn gen(n: i128) -> Vec<i128> {
         let mut ans = vec![1, 2, 2];
 
         for i in 2..n {
@@ -250,19 +245,17 @@ pub mod kolakoski {
 }
 
 pub mod dammit {
-    pub fn A133058() {
-        let num: u32 =
-            crate::get_input_range(u32::MAX as u128, "Input number of terms to generate: ") as u32;
+    pub fn A133058() -> Option<(Vec<i128>, String)> {
+        let num: i128 =
+            crate::get_input_range(i128::MAX as i128, "Input number of terms to generate: ")
+                as i128;
 
         let seq = gen(num);
 
-        print!("A133058 Sequence: ");
-        for i in 0..num {
-            print!("{} ", seq[i as usize]);
-        }
+        Some((seq, "A133058 Sequence: ".into()))
     }
 
-    fn gen(n: u32) -> Vec<u32> {
+    fn gen(n: i128) -> Vec<i128> {
         let mut ans = vec![1, 1];
 
         for i in 2..n {
@@ -277,7 +270,7 @@ pub mod dammit {
         ans
     }
 
-    fn gcd(a: u32, b: u32) -> u32 {
+    fn gcd(a: i128, b: i128) -> i128 {
         let mut a = a;
         let mut b = b;
         while b > 0 {
@@ -290,36 +283,34 @@ pub mod dammit {
 pub mod prime_bin_rev {
     use crate::miller_rabin::is_prime;
 
-    pub fn A265326() {
-        let num: u32 =
-            crate::get_input_range(u32::MAX as u128, "Input number of terms to generate: ") as u32;
+    pub fn A265326() -> Option<(Vec<i128>, String)> {
+        let num: i128 =
+            crate::get_input_range(i128::MAX as i128, "Input number of terms to generate: ")
+                as i128;
 
         let seq = gen(num);
 
-        print!("A265326 Sequence: ");
-        for i in 0..num {
-            print!("{} ", seq[i as usize]);
-        }
+        Some((seq, "A265326 Sequence: ".into()))
     }
 
-    fn gen(n: u32) -> Vec<i32> {
+    fn gen(n: i128) -> Vec<i128> {
         let mut ans = vec![1];
-        let mut p: u32 = 2;
+        let mut p: i128 = 2;
 
         for _ in 0..n {
-            while !is_prime(p as u128) {
+            while !is_prime(p as i128) {
                 p += 1;
             }
-            ans.push(p as i32 - bin_reverse(p) as i32);
+            ans.push(p as i128 - bin_reverse(p) as i128);
             p += 1;
         }
 
         ans
     }
 
-    fn bin_reverse(p: u32) -> u32 {
-        let mut ans: u32 = 0;
-        let mut n: u32 = p;
+    fn bin_reverse(p: i128) -> i128 {
+        let mut ans: i128 = 0;
+        let mut n: i128 = p;
 
         while n > 0 {
             ans <<= 1;
@@ -334,19 +325,17 @@ pub mod prime_bin_rev {
 }
 
 pub mod remy_sigrist {
-    pub fn A279125() {
-        let num: u32 =
-            crate::get_input_range(u32::MAX as u128, "Input number of terms to generate: ") as u32;
+    pub fn A279125() -> Option<(Vec<i128>, String)> {
+        let num: i128 =
+            crate::get_input_range(i128::MAX as i128, "Input number of terms to generate: ")
+                as i128;
 
         let seq = gen(num);
 
-        print!("A279125 Sequence: ");
-        for i in 0..num {
-            print!("{} ", seq[i as usize]);
-        }
+        Some((seq, "A279125 Sequence: ".into()))
     }
 
-    fn gen(n: u32) -> Vec<i32> {
+    fn gen(n: i128) -> Vec<i128> {
         let m = n;
         let mut ans = vec![];
         let mut g = vec![0; m as usize];
@@ -357,7 +346,7 @@ pub mod remy_sigrist {
                 a += 1;
             }
             g[a] += i;
-            ans.push(a as i32);
+            ans.push(a as i128);
         }
 
         ans
@@ -365,19 +354,17 @@ pub mod remy_sigrist {
 }
 
 pub mod wisteria {
-    pub fn A063543() {
-        let num: u32 =
-            crate::get_input_range(u32::MAX as u128, "Input number of terms to generate: ") as u32;
+    pub fn A063543() -> Option<(Vec<i128>, String)> {
+        let num: i128 =
+            crate::get_input_range(i128::MAX as i128, "Input number of terms to generate: ")
+                as i128;
 
         let seq = gen(num);
 
-        print!("A063543 Sequence: ");
-        for i in 0..num {
-            print!("{} ", seq[i as usize]);
-        }
+        Some((seq, "A063543 Sequence: ".into()))
     }
 
-    fn gen(n: u32) -> Vec<i32> {
+    fn gen(n: i128) -> Vec<i128> {
         let mut ans = vec![];
 
         for i in 1..=n {
@@ -387,7 +374,7 @@ pub mod wisteria {
         ans
     }
 
-    fn term(n: u32) -> i32 {
+    fn term(n: i128) -> i128 {
         let mut product = 1;
         let mut m = n;
         while m > 0 {
@@ -397,29 +384,27 @@ pub mod wisteria {
             m = m / 10;
         }
 
-        (n - product) as i32
+        (n - product) as i128
     }
 }
 
 pub mod forest_fire {
-    pub fn A229037() {
-        let num: u32 =
-            crate::get_input_range(u32::MAX as u128, "Input number of terms to generate: ") as u32;
+    pub fn A229037() -> Option<(Vec<i128>, String)> {
+        let num: i128 =
+            crate::get_input_range(i128::MAX as i128, "Input number of terms to generate: ")
+                as i128;
 
         let seq = gen(num);
 
-        print!("A229037 Sequence: ");
-        for i in 0..num {
-            print!("{} ", seq[i as usize]);
-        }
+        Some((seq, "A229037 Sequence: ".into()))
     }
 
-    fn gen(m: u32) -> Vec<i32> {
+    fn gen(m: i128) -> Vec<i128> {
         let mut ans = vec![];
 
         for n in 0..m {
             let (mut i, mut j, mut b) = (1, 1, vec![0]);
-            while (n as i32 - 2 * i as i32) >= 0 {
+            while (n as i128 - 2 * i as i128) >= 0 {
                 let v = 2 * ans[(n - i) as usize] - ans[(n - 2 * i) as usize];
                 if !b.contains(&v) {
                     b.push(v);

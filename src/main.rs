@@ -19,23 +19,24 @@ struct Plot {
 fn main() {
     clear();
 
-    let modes: Vec<String> = vec![
-        "Primality Test".into(),
-        "Inventory".into(),
-        "Stern-Brocot".into(),
-        "Kolakoski".into(),
-        "Fly straight, dammit".into(),
-        "Primes minus their binary reversal".into(),
-        "Remy Sigrist".into(),
-        "Wisteria".into(),
-        "Forest Fire".into(),
-    ];
+    // let modes: Vec<String> = vec![
+    //     "Primality Test".into(),
+    //     "Inventory".into(),
+    //     "Stern-Brocot".into(),
+    //     "Kolakoski".into(),
+    //     "Fly straight, dammit".into(),
+    //     "Primes minus their binary reversal".into(),
+    //     "Remy Sigrist".into(),
+    //     "Wisteria".into(),
+    //     "Forest Fire".into(),
+    // ];
 
-    let mode = &*get_mode(modes);
+    // let mode = &*get_mode(modes);
+    let mode = "Inventory";
 
     clear();
 
-    match mode {
+    let output = match mode {
         "Primality Test" => primality_test(),
         "Inventory" => A342585(),
         "Stern-Brocot" => A002487(),
@@ -45,7 +46,14 @@ fn main() {
         "Remy Sigrist" => A279125(),
         "Wisteria" => A063543(),
         "Forest Fire" => A229037(),
-        _ => println!("Invaid mode"),
+        _ => None,
+    };
+
+    if let Some((seq, msg)) = output {
+        print!("{}", msg);
+        for i in 0..seq.len() {
+            print!("{:?} ", seq[i]);
+        }
     }
 }
 
@@ -97,3 +105,33 @@ fn get_input_line() -> String {
 fn clear() {
     print!("{esc}[2J{esc}[0;0H", esc = 27 as char);
 }
+
+/*
+fn get_seq(nums: Vec<u128>) -> Vec<u128> {
+    let mut seq: Vec<u128> = Vec::new();
+
+    let mut point: (u128, u128) = (0, 0);
+    let mut ends: Vec<(u128, u128)> = Vec::new();
+
+    for i in 0..(nums.len() - 1) {
+        if i % 2 == 0 {
+            point.0 += 1;
+            point.1 = nums[i] - 1;
+        } else {
+            point.0 = nums[i] - 1;
+            point.1 += 1;
+        }
+        ends.push(point.clone());
+    }
+
+    for i in 0..(ends.len() - 1) {
+        if ends[i + 1].0 - ends[i].0 == 1 {
+            seq.push(ends[i + 1].1 - ends[i].1);
+        } else {
+            seq.push(ends[i + 1].0 - ends[i].0);
+        }
+    }
+
+    seq
+}
+*/
